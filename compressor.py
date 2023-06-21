@@ -35,7 +35,7 @@ else:
     print("Everything will be added in the current path\n")
 
 
-image_quality = int(input("\nElija una calidad de imagen, en porcentaje: "))
+image_quality = int(input("\nChoose an image quality in percentage : "))
 
 
 
@@ -56,6 +56,6 @@ for name in os.listdir(current_path):
 
             # Guardo la imagen de forma optimizada
             picture.save(os.path.join(image_path, name + '.jpg'), optimize=True, quality=image_quality)
-            print(f'Se ha guardado la imagen {name}')
+            print(f'The image {name} were saved')
         except Exception as error:
             print(f'{error}\n')
