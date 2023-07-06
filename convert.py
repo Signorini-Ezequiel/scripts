@@ -1,8 +1,11 @@
 from PIL import Image
 import os
 
+formats = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".ico"]
+
+
 print("\n")
-print("Select if you want to choose the current path or a different path to compress the pictures")
+print("Select if you want to choose the current path or a different path to change format")
 print("Here: h \nOther: o\n")
 current_path = input("Where: ")
 while current_path != "h" and current_path != "o":
@@ -12,7 +15,7 @@ if current_path == "h":
 else:
     current_path = input("Enter the path:\n")
 
-print("\n Compressor of images, enter the name of the directory or leave empty to save in the current path\n")
+print("\n Enter the name of the directory or leave empty to save in the current path\n")
 destiny_path = input("Enter the name of the destiny directory:\n")
 image_path = os.path.join(current_path, destiny_path)
 
@@ -24,7 +27,7 @@ if destiny_path != "":
             while new_destiny != "n"  and new_destiny != "y":
                 new_destiny = input("The chosen directory name already exists, change destiny (y/n): ")
             if new_destiny == "y":
-                destiny_path = input("Enter the name of the directory to put the pictures:\n")
+                destiny_path = input("Enter the name of the destiny directory:\n")
                 os.makedirs(image_path)
             else:
                 break
@@ -35,27 +38,22 @@ else:
     print("Everything will be added in the current path\n")
 
 
-image_quality = int(input("\nChoose an image quality in percentage : "))
-
-
+print("Enter the final format for pictures from the list:")
+for format in formats:
+    print(f"- {format}")
+format = input("\nEnter the final format for pictures from the list:").lower()
 
 for name in os.listdir(current_path):
     name, extension = os.path.splitext(name)
 
-    if extension in [".jpg", ".jpeg", ".png", ".bmp", ".webp"]:
+    if extension in formats:
         # Abro la imagen y la transformo a RBG para manipularla
         picture = Image.open(f'{current_path}/{name}{extension}')
         picture = picture.convert('RGB')
 
         try:
-            # Obtengo el tamaño de la imagen
-            # size = os.path.getsize(f'{current_path}/{name}{extension}')
-            # print(f'Tamaño original de la imagen {name}: {size}\n')
-            # size = size/image_quality
-            # print(f'Tamaño final de la imagen {name}: {size}\n')
-
             # Guardo la imagen de forma optimizada
-            picture.save(os.path.join(image_path, name + '.jpg'), optimize=True, quality=image_quality)
+            picture.save(os.path.join(image_path, name + format), optimize=True)
             print(f'The image {name} were saved')
         except Exception as error:
             print(f'{error}\n')
