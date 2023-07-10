@@ -1,5 +1,7 @@
 from PIL import Image
 import os
+from colorama import init, Fore
+init(autoreset=True)
 
 print("\n")
 print("Select if you want to choose the current path or a different path to compress the pictures")
@@ -27,12 +29,13 @@ if destiny_path != "":
                 destiny_path = input("Enter the name of the destiny directory (empty for here):\n")
                 os.makedirs(image_path)
             else:
-                break
+                print(Fore.BLUE + f"Everything will be added in: {image_path}\n")
     else:
         os.makedirs(image_path)
+        print(Fore.BLUE + f"Everything will be added in: {image_path}\n")
 else:
     image_path = current_path
-    print("Everything will be added in the current path\n")
+    print(Fore.BLUE + "Everything will be added in the current path\n")
 
 
 image_quality = ""
@@ -40,21 +43,21 @@ while "" == image_quality:
     try:
         image_quality = int(input("Choose an image quality in percentage : "))
     except:
-        print("The entered value is not a number, enter a number\n")
+        print(Fore.RED + "The entered value is not a number, enter a number\n")
         image_quality = ""
 
 label = ""
 while "" == label:
     label = input("Should we add a label to the compressed picture (y/n): ")
     if "y" != label and "n" != label:
-        print("Enter (y/n)\n")
+        print(Fore.RED + "Enter (y/n)\n")
         label = ""
 if "y" == label:
     label = "-comp"
 
 
 
-print("\n\n--------------------------------------")
+print(Fore.BLUE + "\n\n--------------------------------------")
 for name in os.listdir(current_path):
     name, extension = os.path.splitext(name)
 
@@ -73,7 +76,7 @@ for name in os.listdir(current_path):
 
                 # Guardo la imagen de forma optimizada
                 picture.save(os.path.join(image_path, name + label +'.jpg'), optimize=True, quality=image_quality)
-                print(f'The image {name + label} were saved')
+                print(Fore.BLUE + f'The image {name + label} were saved')
             except Exception as error:
-                print(f'{error}\n')
-print("--------------------------------------\n")
+                print(Fore.RED + f'{error}\n')
+print(Fore.BLUE + "--------------------------------------\n")

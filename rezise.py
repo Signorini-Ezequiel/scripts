@@ -1,5 +1,6 @@
 from PIL import Image
 import os
+from colorama import Fore
 
 def redimensionar_imagen(current_path, destiny_path, rezise):
     # Abre la imagen
@@ -16,6 +17,7 @@ current_path = os.getcwd()
 destiny_path = current_path + "rezised"
 rezise = 4
 
+print(Fore.BLUE + "\n-------------------------------------------")
 for name in os.listdir(current_path):
     name, extension = os.path.splitext(name)
 
@@ -23,3 +25,5 @@ for name in os.listdir(current_path):
         # Abro la imagen y la transformo a RBG para manipularla
         current_path = current_path + '/' + name + extension
         redimensionar_imagen(current_path, destiny_path, rezise)
+        print(f"Rezised: {name}")
+print("-------------------------------------------\n")

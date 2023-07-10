@@ -1,5 +1,6 @@
 import phonenumbers
 import folium
+from colorama import Fore
 from phonenumbers import geocoder, carrier
 from opencage.geocoder import OpenCageGeocode
 key = '8d1df9276d2445c5a93c8b12ce962b1e'
@@ -27,7 +28,7 @@ map.save("myLoc.html")
 
 
 
-print("\n\n--------------------------------------\n")
+print(Fore.BLUE + "\n\n--------------------------------------\n")
 
 print(f"The service provider is: {carrier.name_for_number(service_provider, 'en')}")
 print(f"The original location is: {first_location}")
