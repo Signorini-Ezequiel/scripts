@@ -1,3 +1,8 @@
+from dependences import instalar_dependencias_faltantes
+
+# Chequea que las dependencias esten instaladas
+instalar_dependencias_faltantes()
+
 from metadata_deleter import remove_metadata
 from rename import rename
 import os
